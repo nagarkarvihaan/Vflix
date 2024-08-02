@@ -3,10 +3,23 @@ import useFetchData from "@/hooks/useFetchData";
 import { useSession } from "next-auth/react";
 import Link from "next/link";
 import { useRouter } from "next/router";
-import { useState , useEffect} from "react";
+import { useState, useEffect } from "react";
 import { FcRating } from "react-icons/fc";
+import Loading from "@/components/Loading";
 
 export default function draft() {
+
+    const { data: session, status } = useSession();
+    const router = useRouter();
+
+    if (status === "loading") {
+        return <Loading />
+    }
+
+    if (!session) {
+        router.push('/auth');
+        return null;
+    }
 
     const [currentPage, setCurrentPage] = useState(1);
     const [perPage] = useState(7);
@@ -39,25 +52,6 @@ export default function draft() {
 
     for (let i = 1; i <= Math.ceil(allblog / perPage); i++) {
         pageNumbers.push(i);
-    }
-
-
-    const { data: session, status } = useSession();
-    const router = useRouter();
-
-    useEffect(() => {
-        if (!session) {
-            router.push('/auth');
-        }
-    }, [router, session]);
-
-
-
-    if (status === "loading") {
-        // Loading state, loader or any other indicator
-        return <div className='full-h flex flex-center'>
-            <div className="loading-bar">Loading</div>
-        </div>;
     }
 
     if (session) {

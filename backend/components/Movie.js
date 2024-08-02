@@ -7,29 +7,48 @@ import axios from 'axios';
 export default function Movie(
     {
         _id,
+        title: existingtitle,
+        slug: existingslug,
+        bgposter: existingbgposter,
+        smposter: existingsmposter,
+        titlecategory: existingtitlecategory,
+        description: existingdescription,
+        rating: existingrating,
+        duration: existingduration,
+        year: existingyear,
+        genre: existinggenre,
+        language: existinglanguage,
+        subtitle: existingsubtitle,
+        size: existingsize,
+        quality: existingquality,
+        youtubelink: existingyoutubelink,
+        category: existingcategory,
+        watchonline: existingwatchonline,
+        downloadlink: existingdownloadlink,
+        status: existingstatus
     }
 ) {
     const [redirect, setRedirect] = useState(false);
     const router = useRouter();
 
-    const [title, setTitle] = useState('');
-    const [slug, setSlug] = useState('');
-    const [bgposter, setBgposter] = useState('');
-    const [smposter, setSmposter] = useState('');
-    const [titlecategory, setTitleCategory] = useState('');
-    const [description, setDescription] = useState('');
-    const [rating, setRating] = useState('');
-    const [duration, setDuration] = useState('');
-    const [year, setYear] = useState('');
-    const [genre, setGenre] = useState('');
-    const [language, setLanguage] = useState('');
-    const [subtitle, setSubtitle] = useState('');
-    const [size, setSize] = useState('');
-    const [quality, setQuality] = useState('');
-    const [youtubelink, setYoutubelink] = useState('');
-    const [category, setCategory] = useState('');
-    const [watchonline, setWatchonline] = useState('');
-    const [downloadlink, setDownloadLink] = useState({
+    const [title, setTitle] = useState(existingtitle || '');
+    const [slug, setSlug] = useState(existingslug || '');
+    const [bgposter, setBgposter] = useState(existingbgposter || '');
+    const [smposter, setSmposter] = useState(existingsmposter || '');
+    const [titlecategory, setTitleCategory] = useState(existingtitlecategory || '');
+    const [description, setDescription] = useState(existingdescription || '');
+    const [rating, setRating] = useState(existingrating || '');
+    const [duration, setDuration] = useState(existingduration || '');
+    const [year, setYear] = useState(existingyear || '');
+    const [genre, setGenre] = useState(existinggenre || '');
+    const [language, setLanguage] = useState(existinglanguage || '');
+    const [subtitle, setSubtitle] = useState(existingsubtitle || '');
+    const [size, setSize] = useState(existingsize || '');
+    const [quality, setQuality] = useState(existingquality || '');
+    const [youtubelink, setYoutubelink] = useState(existingyoutubelink || '');
+    const [category, setCategory] = useState(existingcategory || '');
+    const [watchonline, setWatchonline] = useState(existingwatchonline || '');
+    const [downloadlink, setDownloadLink] = useState(existingdownloadlink || {
         "480p": "",
         "720p": "",
         "1080p": "",
@@ -41,7 +60,7 @@ export default function Movie(
         "1080p": false,
         "4k": false,
     });
-    const [status, setStatus] = useState('');
+    const [status, setStatus] = useState(existingstatus || '');
 
     //function to create movies
     async function createMovie(ev) {
@@ -279,7 +298,7 @@ export default function Movie(
 
                     {/* Youtube embed link*/}
                     <div className="w-100 flex flex-col flex-left mb-2">
-                        <label htmlFor="youtubelink">Release Year</label>
+                        <label htmlFor="youtubelink">YouTube Link</label>
                         <input type="text"
                             id="youtubelink"
                             placeholder="youtubelink"
